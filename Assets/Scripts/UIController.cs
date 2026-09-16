@@ -11,6 +11,11 @@ public class UIController : MonoBehaviour
     public GameObject leftArrow;
     public GameObject rightArrow;
 
+    public GameObject Head;
+    public GameObject Arms;
+    public GameObject Body;
+    public GameObject Legs;
+
     private Vector3 lastposition = Vector3.zero;
     private Vector3 currentposition = Vector3.zero;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -27,22 +32,27 @@ public class UIController : MonoBehaviour
         {
             ArrowReset();
             upArrow.GetComponent<UnityEngine.UI.Image>().color = Color.red;
+            Head.GetComponent<Health>().TakeDamage(10);
         }
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             ArrowReset();
             downArrow.GetComponent<UnityEngine.UI.Image>().color = Color.red;
+            Legs.GetComponent<Health>().TakeDamage(10);
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             ArrowReset();
             leftArrow.GetComponent<UnityEngine.UI.Image>().color = Color.red;
+            Arms.GetComponent<Health>().TakeDamage(10);
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             ArrowReset();
             rightArrow.GetComponent<UnityEngine.UI.Image>().color = Color.red;
+            Body.GetComponent<Health>().TakeDamage(10);
+
         }
 
         lastposition = currentposition;
