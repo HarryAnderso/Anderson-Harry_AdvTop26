@@ -10,6 +10,9 @@ public class UIController : MonoBehaviour
     public GameObject downArrow;
     public GameObject leftArrow;
     public GameObject rightArrow;
+
+    private Vector3 lastposition = Vector3.zero;
+    private Vector3 currentposition = Vector3.zero;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -41,6 +44,11 @@ public class UIController : MonoBehaviour
             ArrowReset();
             rightArrow.GetComponent<UnityEngine.UI.Image>().color = Color.red;
         }
+
+        lastposition = currentposition;
+        currentposition = Input.mousePosition;
+
+
 
     }
     void ArrowReset ()
