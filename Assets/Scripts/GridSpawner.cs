@@ -14,7 +14,7 @@ public class GridSpawner : MonoBehaviour
             for (int j = 0; j < Width; j++)
             {
                 Instantiate(TileFab, new Vector3(j, 0, i), Quaternion.identity);
-              Instantiate
+              
             }
         }
     }
