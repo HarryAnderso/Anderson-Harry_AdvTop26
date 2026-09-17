@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5417736232395761043}
   - component: {fileID: 1770860411350633694}
   - component: {fileID: -3282895942214648435}
+  - component: {fileID: -1588295391821558275}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -120,11 +121,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 978276460095216768}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a694aa065a628f408bf6565985c3de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RNGerator
+  materials:
+  - {fileID: 2100000, guid: 9fba56d8f6b6deb4cb602c97d5d901c4, type: 2}
+  - {fileID: 2100000, guid: ef395e1cc03cda949abc31fae527d6cd, type: 2}
+  - {fileID: 2100000, guid: eaf79c83f062d8c4ca2a8080da918aa7, type: 2}
+--- !u!114 &-1588295391821558275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978276460095216768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 456de4c46a8086c44a183cce155e9203, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PerlinGenerator
   materials:
   - {fileID: 2100000, guid: 9fba56d8f6b6deb4cb602c97d5d901c4, type: 2}
   - {fileID: 2100000, guid: ef395e1cc03cda949abc31fae527d6cd, type: 2}

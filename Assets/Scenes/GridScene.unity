@@ -376,13 +376,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 961739749}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 18.48, z: -0.61}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
+  m_LocalPosition: {x: 0, y: 12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
 --- !u!1 &2092960055
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,8 +413,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridSpawner
   TileFab: {fileID: 978276460095216768, guid: 797378254a14fcb4499e185e8aa992f9, type: 3}
-  Width: 2
-  length: 2
+  Width: 10
+  length: 10
 --- !u!4 &2092960057
 Transform:
   m_ObjectHideFlags: 0

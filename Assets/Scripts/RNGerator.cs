@@ -8,7 +8,7 @@ public class RNGerator : MonoBehaviour
     void Start()
     {
         int heightvalue = Random.Range(0, 3);
-        Debug.Log(heightvalue);
+        //Debug.Log(heightvalue);
         GetComponent<MeshRenderer>().material = materials[heightvalue];
     }
 
