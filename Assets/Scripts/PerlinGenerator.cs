@@ -25,12 +25,8 @@ public class PerlinGenerator : MonoBehaviour
             GetComponent<MeshRenderer>().material = materials[2];
         }
 
-            Debug.Log(f + ", " + transform.position.x + ", " + transform.position.z);
+            //Debug.Log(f + ", " + transform.position.x + ", " + transform.position.z);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
