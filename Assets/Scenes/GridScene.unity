@@ -413,8 +413,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridSpawner
   TileFab: {fileID: 978276460095216768, guid: 797378254a14fcb4499e185e8aa992f9, type: 3}
-  Width: 10
-  length: 10
+  Width: 3
+  length: 3
 --- !u!4 &2092960057
 Transform:
   m_ObjectHideFlags: 0
