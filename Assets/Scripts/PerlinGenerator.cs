@@ -20,16 +20,16 @@ public class PerlinGenerator : MonoBehaviour
         else if (f < .5)
         {
             GetComponent<MeshRenderer>().material = materials[1];
-            Vector3 scaleChange = new Vector3(1, 1.5f, 1);
+            Vector3 scaleChange = new Vector3(1, (1.5f+f), 1);
             transform.localScale = scaleChange;
-            transform.position = new Vector3(transform.position.x, transform.position.y + .25f, transform.position.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y + .25f + (f * 0.5f), transform.position.z);
         }
         else
         {
             GetComponent<MeshRenderer>().material = materials[2];
-            Vector3 scaleChange = new Vector3(1, 2f, 1);
+            Vector3 scaleChange = new Vector3(1, (2f+f), 1);
             transform.localScale = scaleChange;
-            transform.position = new Vector3(transform.position.x, transform.position.y +.5f, transform.position.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y +.5f + (f * 0.5f), transform.position.z);
         }
 
             //Debug.Log(f + ", " + transform.position.x + ", " + transform.position.z);
