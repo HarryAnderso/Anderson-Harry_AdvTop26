@@ -128,4 +128,8 @@ MonoBehaviour:
   materials:
   - {fileID: 2100000, guid: 73f6f43aa381b4c42add7457dc806591, type: 2}
   - {fileID: 2100000, guid: ef395e1cc03cda949abc31fae527d6cd, type: 2}
+  - {fileID: 2100000, guid: 8d8dd3cce436f614aa09462d9d20ba6e, type: 2}
+  - {fileID: 2100000, guid: 688f13bf723540341bb72a8aac797b40, type: 2}
+  - {fileID: 2100000, guid: aafcaf630a758c64b9ebfc6999bf63c5, type: 2}
+  - {fileID: 2100000, guid: 788d88a6cdf733241af711de190b16bd, type: 2}
   - {fileID: 2100000, guid: eaf79c83f062d8c4ca2a8080da918aa7, type: 2}
