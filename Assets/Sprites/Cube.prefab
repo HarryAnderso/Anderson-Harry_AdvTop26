@@ -133,3 +133,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: aafcaf630a758c64b9ebfc6999bf63c5, type: 2}
   - {fileID: 2100000, guid: 788d88a6cdf733241af711de190b16bd, type: 2}
   - {fileID: 2100000, guid: eaf79c83f062d8c4ca2a8080da918aa7, type: 2}
+  xPos: 0
+  zPos: 0
+  heightP: 0
+  tempP: 0
+  fertP: 0
+  moistureP: 0
