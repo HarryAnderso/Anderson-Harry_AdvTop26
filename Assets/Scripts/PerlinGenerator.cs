@@ -47,6 +47,7 @@ public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExit
         {
             Debug.LogError("Canvas not found in the scene.");
         }
+
         
        
 
