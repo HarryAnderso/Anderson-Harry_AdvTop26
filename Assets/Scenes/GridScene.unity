@@ -778,6 +778,9 @@ MonoBehaviour:
   TileFab: {fileID: 978276460095216768, guid: 797378254a14fcb4499e185e8aa992f9, type: 3}
   Width: 50
   length: 50
+  perlinScale: 1
+  perlinOffset: 0
+  tileList: []
 --- !u!4 &2092960057
 Transform:
   m_ObjectHideFlags: 0

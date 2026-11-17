@@ -32,7 +32,10 @@ public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExit
     [SerializeField]
      Boolean textActive = false;
 
-    
+    public float perlinseed = 0f;
+    public float perlinScale = 1.0f;
+
+
 
 
     void Start()
@@ -51,13 +54,14 @@ public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExit
         
        
 
-        xPos = transform.position.x + .1f;
-         zPos = transform.position.z + .1f;
+        //xPos = transform.position.x + .1f;
+        //zPos = transform.position.z + .1f;
 
-        heightP = Mathf.PerlinNoise(xPos, zPos);
-        tempP = Mathf.PerlinNoise(xPos + 1000f, zPos + 1000f);
-        fertP = Mathf.PerlinNoise(xPos + 500f, zPos + 500f);
-        moistureP = Mathf.PerlinNoise(xPos + 2000f, zPos + 2000f);
+        //heightP = Mathf.PerlinNoise(xPos, zPos);
+        //tempP = Mathf.PerlinNoise(xPos + 1000f, zPos + 1000f);
+        //fertP = Mathf.PerlinNoise(xPos + 500f, zPos + 500f);
+        //moistureP = Mathf.PerlinNoise(xPos + 2000f, zPos + 2000f);
+        initalize();
 
 
 
@@ -92,7 +96,7 @@ public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
         switch (details)
         {
-
+            //enumerator
             case 0:
                 GetComponent<MeshRenderer>().material = materials[0]; break;
             case 10:
@@ -187,6 +191,17 @@ public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public void ToolTipTextChange()
     {
         tooltip.text = "Height: " + transform.localScale.y.ToString("F2") + "(" + heightP.ToString("F2") + ")" + "\n" + "Temperature: " + tempP.ToString("F2") + "\n" + "Fertility: " + fertP.ToString("F2") + "\n" + "Moisture: " + moistureP.ToString("F2");
+    }
+
+    public void initalize()
+    {
+        xPos = transform.position.x + .1f;
+        zPos = transform.position.z + .1f;
+
+        heightP = Mathf.PerlinNoise(xPos, zPos);
+        tempP = Mathf.PerlinNoise(xPos + 1000f, zPos + 1000f);
+        fertP = Mathf.PerlinNoise(xPos + 500f, zPos + 500f);
+        moistureP = Mathf.PerlinNoise(xPos + 2000f, zPos + 2000f);
     }
 
 

@@ -7,6 +7,9 @@ public class GridSpawner : MonoBehaviour
     [Header("Grid Size Input")]
     public int Width = 10;
     public int length = 10;
+    [Header("Perlin Parameters")]
+    public float perlinScale = 1.0f;
+    public float perlinOffset = 0.0f;
 
     public List<GameObject> tileList;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -38,6 +41,7 @@ public class GridSpawner : MonoBehaviour
                 //Instantiate(TileFab, new Vector3(j, 0, i), Quaternion.identity);
                 GameObject newtile = Instantiate(TileFab, new Vector3(j, 0, i), Quaternion.identity);
                 tileList.Add(newtile);
+                newtile.GetComponent<PerlinGenerator>().perlinseed = perlinOffset;
             }
         }
     }
