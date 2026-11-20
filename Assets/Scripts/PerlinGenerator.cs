@@ -282,10 +282,10 @@ public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExit
         xPos = transform.position.x + .1f;
         zPos = transform.position.z + .1f;
 
-        heightP = Mathf.PerlinNoise(xPos, zPos);
-        tempP = Mathf.PerlinNoise(xPos + 1000f, zPos + 1000f);
-        fertP = Mathf.PerlinNoise(xPos + 500f, zPos + 500f);
-        moistureP = Mathf.PerlinNoise(xPos + 2000f, zPos + 2000f);
+        heightP = Mathf.PerlinNoise(xPos + perlinseed, zPos + perlinseed);
+        tempP = Mathf.PerlinNoise(xPos + 1000f + perlinseed, zPos + 1000f + perlinseed);
+        fertP = Mathf.PerlinNoise(xPos + 500f + perlinseed, zPos + 500f + perlinseed);
+        moistureP = Mathf.PerlinNoise(xPos + 2000f + perlinseed, zPos + 2000f + perlinseed);
     }
 
 
