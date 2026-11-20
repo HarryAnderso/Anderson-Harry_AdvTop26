@@ -7,6 +7,16 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    enum Environment
+    {
+        Level_hot,
+        Level_normal,
+        Level_cold,
+        Mountain_hot,
+        Mountain_normal,
+        Mountain_cold,
+        Sea,
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Material[] materials;
 
@@ -35,11 +45,20 @@ public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public float perlinseed = 0f;
     public float perlinScale = 1.0f;
 
+    [Header("Environment Paramaters")]
+    [SerializeField]
+    Environment localenvironment;
+    public float MountainCutoff = 0.5f;
+    public float SeaCutoff = 0.4f;
+    public float hotCutoff = 0.5f;
+    public float coldCutoff = 0.4f;
+
 
 
 
     void Start()
     {
+        
 
         Canvas canvas = FindAnyObjectByType<Canvas>();
         if (canvas != null)
@@ -69,6 +88,7 @@ public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExit
         {
 
             details = 0;
+            localenvironment = Environment.Sea;
 
         }
         else if (heightP < .5)
@@ -81,6 +101,7 @@ public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExit
             SetTemp(tempP);
             SetFertility(fertP);
             SetMoisture(moistureP);
+            SetEnvironment();
         }
         else
         {
@@ -92,29 +113,48 @@ public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExit
             SetTemp(tempP);
             SetFertility(fertP);
             SetMoisture(moistureP);
+            SetEnvironment();
         }
 
-        switch (details)
+        //switch (details)
+        //{
+
+        //    case 0:
+        //        GetComponent<MeshRenderer>().material = materials[0]; break;
+        //    case 10:
+        //        GetComponent<MeshRenderer>().material = materials[1]; break;
+        //    case 11:
+        //        GetComponent<MeshRenderer>().material = materials[2]; break;
+        //    case 12:
+        //        GetComponent<MeshRenderer>().material = materials[3]; break;
+        //    case 20:
+        //        GetComponent<MeshRenderer>().material = materials[4]; break;
+        //    case 21:
+        //        GetComponent<MeshRenderer>().material = materials[5]; break;
+        //    case 22:
+        //        GetComponent<MeshRenderer>().material = materials[6]; break;
+        //}
+
+        switch(localenvironment)
         {
-            //enumerator
-            case 0:
+            case Environment.Sea:
                 GetComponent<MeshRenderer>().material = materials[0]; break;
-            case 10:
+            case Environment.Level_cold:
                 GetComponent<MeshRenderer>().material = materials[1]; break;
-            case 11:
+            case Environment.Level_normal:
                 GetComponent<MeshRenderer>().material = materials[2]; break;
-            case 12:
+            case Environment.Level_hot:
                 GetComponent<MeshRenderer>().material = materials[3]; break;
-            case 20:
+            case Environment.Mountain_cold:
                 GetComponent<MeshRenderer>().material = materials[4]; break;
-            case 21:
+            case Environment.Mountain_normal:
                 GetComponent<MeshRenderer>().material = materials[5]; break;
-            case 22:
+            case Environment.Mountain_hot:
                 GetComponent<MeshRenderer>().material = materials[6]; break;
         }
-        
-        
-        
+
+
+
     }
 
     public void Update()
@@ -176,6 +216,50 @@ public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
         }
     }
+
+    public void SetEnvironment()
+    {
+        if(tempP<coldCutoff)
+        {
+            if(heightP < MountainCutoff)
+            {
+                localenvironment = Environment.Level_cold;
+                details += 1;
+            }
+            else if (heightP > MountainCutoff)
+            {
+                localenvironment = Environment.Mountain_cold;
+                details += 2;
+            }
+        }
+        else if (tempP < hotCutoff)
+        {
+            if (heightP < MountainCutoff)
+            {
+                localenvironment = Environment.Level_normal;
+                details += 1;
+            }
+            else if (heightP > MountainCutoff)
+            {
+                localenvironment = Environment.Mountain_normal;
+                details += 2;
+            }
+        }
+        else
+        {
+            if (heightP < MountainCutoff)
+            {
+                localenvironment = Environment.Level_hot;
+                details += 1;
+            }
+            else if (heightP > MountainCutoff)
+            {
+                localenvironment = Environment.Mountain_hot;
+                details += 2;
+            }
+        }
+    }
+
 
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
