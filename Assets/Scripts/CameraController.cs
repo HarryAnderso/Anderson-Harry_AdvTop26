@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 public class CameraController : MonoBehaviour
 {
     public float sensitivity = 1f;
-    public float SprintSensitivity = 3f;
+    public float SprintSensitivity = 6f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

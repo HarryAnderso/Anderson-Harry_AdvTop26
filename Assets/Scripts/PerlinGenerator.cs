@@ -30,20 +30,20 @@ public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExit
     [SerializeField]
     private float zPos;
     [SerializeField]
-    private float heightP;
+    public float heightP;
     [SerializeField]
     private float tempP;
     [SerializeField]
     private float fertP;
     [SerializeField]
     private float moistureP;
-    //[SerializeField]
+    [SerializeField]
     public float textTimer ;
     [SerializeField]
      Boolean textActive = false;
 
     public float perlinseed = 0f;
-    public float perlinScale = 1.0f;
+    public float perlinScale = 10.0f;
 
     [Header("Environment Paramaters")]
     [SerializeField]
@@ -73,13 +73,6 @@ public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExit
         
        
 
-        //xPos = transform.position.x + .1f;
-        //zPos = transform.position.z + .1f;
-
-        //heightP = Mathf.PerlinNoise(xPos, zPos);
-        //tempP = Mathf.PerlinNoise(xPos + 1000f, zPos + 1000f);
-        //fertP = Mathf.PerlinNoise(xPos + 500f, zPos + 500f);
-        //moistureP = Mathf.PerlinNoise(xPos + 2000f, zPos + 2000f);
         initalize();
 
 
@@ -93,7 +86,6 @@ public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExit
         }
         else if (heightP < .5)
         {
-            //GetComponent<MeshRenderer>().material = materials[1];
             details = 10;
             Vector3 scaleChange = new Vector3(1, (1.5f+heightP), 1);
             transform.localScale = scaleChange;
@@ -105,7 +97,6 @@ public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExit
         }
         else
         {
-            //GetComponent<MeshRenderer>().material = materials[2];
             details = 20;
             Vector3 scaleChange = new Vector3(1, (2f+heightP), 1);
             transform.localScale = scaleChange;
@@ -116,24 +107,6 @@ public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExit
             SetEnvironment();
         }
 
-        //switch (details)
-        //{
-
-        //    case 0:
-        //        GetComponent<MeshRenderer>().material = materials[0]; break;
-        //    case 10:
-        //        GetComponent<MeshRenderer>().material = materials[1]; break;
-        //    case 11:
-        //        GetComponent<MeshRenderer>().material = materials[2]; break;
-        //    case 12:
-        //        GetComponent<MeshRenderer>().material = materials[3]; break;
-        //    case 20:
-        //        GetComponent<MeshRenderer>().material = materials[4]; break;
-        //    case 21:
-        //        GetComponent<MeshRenderer>().material = materials[5]; break;
-        //    case 22:
-        //        GetComponent<MeshRenderer>().material = materials[6]; break;
-        //}
 
         switch(localenvironment)
         {
@@ -282,10 +255,10 @@ public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExit
         xPos = transform.position.x + .1f;
         zPos = transform.position.z + .1f;
 
-        heightP = Mathf.PerlinNoise(xPos + perlinseed, zPos + perlinseed);
-        tempP = Mathf.PerlinNoise(xPos + 1000f + perlinseed, zPos + 1000f + perlinseed);
-        fertP = Mathf.PerlinNoise(xPos + 500f + perlinseed, zPos + 500f + perlinseed);
-        moistureP = Mathf.PerlinNoise(xPos + 2000f + perlinseed, zPos + 2000f + perlinseed);
+        heightP = Mathf.PerlinNoise((xPos + perlinseed) / perlinScale, (zPos + perlinseed)/ perlinScale);
+        tempP = Mathf.PerlinNoise((xPos + 1000f + perlinseed)/ perlinScale, (zPos + 1000f + perlinseed)/ perlinScale );
+        fertP = Mathf.PerlinNoise((xPos + 500f + perlinseed)/perlinScale, (zPos + 500f + perlinseed)/perlinScale);
+        moistureP = Mathf.PerlinNoise((xPos + 2000f + perlinseed)/perlinScale, (zPos + 2000f + perlinseed)/perlinScale);
     }
 
 
