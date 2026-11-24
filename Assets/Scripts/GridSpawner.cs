@@ -8,7 +8,7 @@ public class GridSpawner : MonoBehaviour
     public int Width = 10;
     public int length = 10;
     [Header("Perlin Parameters")]
-    public float perlinScale = 1.0f;
+    public float perlinScale = 10.0f;
     public float perlinOffset = 0.0f;
     public float MountainCutoff = 0.5f;
     public float SeaCutoff = 0.4f;
