@@ -5,6 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Unity.Mathematics;
 public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     enum Environment
@@ -43,7 +44,9 @@ public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExit
      Boolean textActive = false;
 
     public float perlinseed = 0f;
-    public float perlinScale = 10.0f;
+    public float perlinLandScale = 10.0f;
+    public float perlinTempScale = 10.0f;
+
 
     [Header("Environment Paramaters")]
     [SerializeField]
@@ -73,21 +76,24 @@ public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExit
         
        
 
-        initalize();
+        Initalize();
 
 
 
-        if (heightP < .4)
+        if (heightP < SeaCutoff)
         {
 
             details = 0;
             localenvironment = Environment.Sea;
 
         }
-        else if (heightP < .5)
+        else if (heightP < MountainCutoff)
         {
             details = 10;
-            Vector3 scaleChange = new Vector3(1, (1.5f+heightP), 1);
+
+            //Vector3 scaleChange = new Vector3(1, (3f*heightP), 1);
+            float heightlerp = Mathf.Lerp(0.25f, 1f, heightP);
+            Vector3 scaleChange = new Vector3(1, (Mathf.SmoothStep(.25f, 5f, heightP)), 1);
             transform.localScale = scaleChange;
             transform.position = new Vector3(transform.position.x, transform.position.y + .25f + (heightP * 0.5f), transform.position.z);
             SetTemp(tempP);
@@ -98,7 +104,8 @@ public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExit
         else
         {
             details = 20;
-            Vector3 scaleChange = new Vector3(1, (2f+heightP), 1);
+            //Vector3 scaleChange = new Vector3(1, (6f*heightP), 1);
+            Vector3 scaleChange = new Vector3(1, (Mathf.SmoothStep(5f, 15f, heightP)), 1);
             transform.localScale = scaleChange;
             transform.position = new Vector3(transform.position.x, transform.position.y +.5f + (heightP * 0.5f), transform.position.z);
             SetTemp(tempP);
@@ -113,17 +120,17 @@ public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExit
             case Environment.Sea:
                 GetComponent<MeshRenderer>().material = materials[0]; break;
             case Environment.Level_cold:
-                GetComponent<MeshRenderer>().material = materials[1]; break;
-            case Environment.Level_normal:
                 GetComponent<MeshRenderer>().material = materials[2]; break;
+            case Environment.Level_normal:
+                GetComponent<MeshRenderer>().material = materials[1]; break;
             case Environment.Level_hot:
                 GetComponent<MeshRenderer>().material = materials[3]; break;
             case Environment.Mountain_cold:
-                GetComponent<MeshRenderer>().material = materials[4]; break;
-            case Environment.Mountain_normal:
-                GetComponent<MeshRenderer>().material = materials[5]; break;
-            case Environment.Mountain_hot:
                 GetComponent<MeshRenderer>().material = materials[6]; break;
+            case Environment.Mountain_normal:
+                GetComponent<MeshRenderer>().material = materials[4]; break;
+            case Environment.Mountain_hot:
+                GetComponent<MeshRenderer>().material = materials[5]; break;
         }
 
 
@@ -250,15 +257,30 @@ public class PerlinGenerator : MonoBehaviour, IPointerEnterHandler, IPointerExit
         tooltip.text = "Height: " + transform.localScale.y.ToString("F2") + "(" + heightP.ToString("F2") + ")" + "\n" + "Temperature: " + tempP.ToString("F2") + "\n" + "Fertility: " + fertP.ToString("F2") + "\n" + "Moisture: " + moistureP.ToString("F2");
     }
 
-    public void initalize()
+    public void Initalize()
     {
         xPos = transform.position.x + .1f;
         zPos = transform.position.z + .1f;
 
-        heightP = Mathf.PerlinNoise((xPos + perlinseed) / perlinScale, (zPos + perlinseed)/ perlinScale);
-        tempP = Mathf.PerlinNoise((xPos + 1000f + perlinseed)/ perlinScale, (zPos + 1000f + perlinseed)/ perlinScale );
-        fertP = Mathf.PerlinNoise((xPos + 500f + perlinseed)/perlinScale, (zPos + 500f + perlinseed)/perlinScale);
-        moistureP = Mathf.PerlinNoise((xPos + 2000f + perlinseed)/perlinScale, (zPos + 2000f + perlinseed)/perlinScale);
+        //heightP = Mathf.PerlinNoise((xPos + perlinseed) / perlinScale, (zPos + perlinseed)/ perlinScale);
+        //tempP = Mathf.PerlinNoise((xPos + 1000f + perlinseed)/ perlinScale, (zPos + 1000f + perlinseed)/ perlinScale );
+        //fertP = Mathf.PerlinNoise((xPos + 500f + perlinseed)/perlinScale, (zPos + 500f + perlinseed)/perlinScale);
+        //moistureP = Mathf.PerlinNoise((xPos + 2000f + perlinseed)/perlinScale, (zPos + 2000f + perlinseed)/perlinScale);
+
+        heightP = SimplexEQ(0f, perlinLandScale);
+        tempP = SimplexEQ(1000f, perlinTempScale);
+        fertP = SimplexEQ(500f, 1);
+        moistureP = SimplexEQ(2000f, 1);
+
+
+    }
+
+    public float SimplexEQ(float offset, float scale)
+    {
+        float2 pos = new float2((xPos + perlinseed+ offset) / scale, (zPos + perlinseed + offset) / scale);
+        float tempsimplex = noise.snoise(pos);
+        tempsimplex = (tempsimplex + 1) / 2;
+        return tempsimplex;
     }
 
 

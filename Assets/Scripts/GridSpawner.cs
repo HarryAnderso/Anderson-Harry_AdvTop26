@@ -5,10 +5,11 @@ public class GridSpawner : MonoBehaviour
 {
      public GameObject TileFab;
     [Header("Grid Size Input")]
-    public int Width = 10;
+    public int width = 10;
     public int length = 10;
     [Header("Perlin Parameters")]
-    public float perlinScale = 10.0f;
+    public float perlinLandScale = 10.0f;
+    public float perlinTempScale = 10.0f;
     public float perlinOffset = 0.0f;
     public float MountainCutoff = 0.5f;
     public float SeaCutoff = 0.4f;
@@ -41,20 +42,21 @@ public class GridSpawner : MonoBehaviour
             
         }
 
-        if (Input.GetKeyDown(KeyCode.A)) analyize();
+        if (Input.GetKeyDown(KeyCode.A)) Analyize();
     }
 
     public void Generate()
     {
         for (int i = 0; i < length; i++)
         {
-            for (int j = 0; j < Width; j++)
+            for (int j = 0; j < width; j++)
             {
                 //Instantiate(TileFab, new Vector3(j, 0, i), Quaternion.identity);
                 GameObject newtile = Instantiate(TileFab, new Vector3(j, 0, i), Quaternion.identity);
                 tileList.Add(newtile);
                 newtile.GetComponent<PerlinGenerator>().perlinseed = perlinOffset;
-                newtile.GetComponent<PerlinGenerator>().perlinScale = perlinScale;
+                newtile.GetComponent<PerlinGenerator>().perlinLandScale = perlinLandScale;
+                newtile.GetComponent<PerlinGenerator>().perlinTempScale = perlinTempScale;
                 newtile.GetComponent<PerlinGenerator>().MountainCutoff = MountainCutoff;
                 newtile.GetComponent<PerlinGenerator>().SeaCutoff = SeaCutoff;
                 newtile.GetComponent<PerlinGenerator>().hotCutoff = hotCutoff;
@@ -64,7 +66,7 @@ public class GridSpawner : MonoBehaviour
         }
     }
 
-    public void analyize()
+    public void Analyize()
     {
         foreach (GameObject tile in tileList)
         {
